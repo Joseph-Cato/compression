@@ -55,7 +55,13 @@ public class TreeTest {
 
     @Test
     public void createHuffmanTreeTest() {
+        Node base11 = new Node('b', 2);
+        Node base12 = new Node('c', 1);
+        Node base21 = new Node('a', 3);
+        Node internal22 = new Node(base11, base12);
+        Node internal31 = new Node(base21, internal22);
 
+        Assert.assertEquals(internal31, Tree.createHuffmanTree("aaabbc"));
     }
 
 

@@ -1,17 +1,20 @@
 package compression.huffman;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Hashtable;
 import java.util.Map;
 
 public class Tree {
 
-    static Tree createHuffmanTree(String text) {
+    static Node createHuffmanTree(String text) {
         Hashtable<Character, Integer> characterIntegerHashtable = charCounter(text);
 
+        // Create array for nodes
         Node[] nodes = new Node[characterIntegerHashtable.size()];
 
+        // Fill node array with nodes from characterIntegerHashtable
         int counter = 0;
-
         for (Map.Entry<Character, Integer> entry : characterIntegerHashtable.entrySet()) {
             Character c = entry.getKey();
             Integer f = entry.getValue();
@@ -20,6 +23,35 @@ public class Tree {
             counter += 1;
         }
 
+        // Sort nodes array into ascending order
+        Comparator<Node> compareByFrequency = Comparator.comparing(Node::getFREQUENCY);
+
+
+        // Sorts and merges Nodes while there is more than one
+        while (nodes.length > 1) {
+            Arrays.sort(nodes, compareByFrequency);
+            nodes = mergeNodes(nodes);
+        }
+
+        return nodes[0];
+    }
+
+    static private Node[] mergeNodes(Node[] nodes) {
+
+        // Returns array of one node if only two nodes are left
+        if (nodes.length == 2) return new Node[]{new Node(nodes[1], nodes[0])};
+
+        // Copy array skipping first two nodes (smallest two nodes)
+        Node[] newNodes = new Node[nodes.length-1];
+        for (int i = 2; i < nodes.length; i++) {
+            newNodes[i-1] = nodes[i];
+        }
+
+        // Create new node (internal) out of two smallest add to new array and return said array
+        Node internalNode = new Node(nodes[1], nodes[0]);
+        newNodes[1] = internalNode;
+
+        return newNodes;
     }
 
     static Hashtable<Character, Integer> charCounter(String text) {

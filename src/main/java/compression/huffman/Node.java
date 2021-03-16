@@ -20,4 +20,7 @@ public class Node {
         this.RIGHT = RIGHT;
     }
 
+    public int getFREQUENCY() {
+        return FREQUENCY;
+    }
 }
