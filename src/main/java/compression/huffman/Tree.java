@@ -1,6 +1,7 @@
 package compression.huffman;
 
 import java.util.Hashtable;
+import java.util.Map;
 
 public class Tree {
 
@@ -11,11 +12,13 @@ public class Tree {
 
         int counter = 0;
 
-        characterIntegerHashtable.forEach( (c, f) -> {
+        for (Map.Entry<Character, Integer> entry : characterIntegerHashtable.entrySet()) {
+            Character c = entry.getKey();
+            Integer f = entry.getValue();
             Node node = new Node(c, f);
             nodes[counter] = node;
             counter += 1;
-        });
+        }
 
     }
 
