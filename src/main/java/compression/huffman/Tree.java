@@ -7,6 +7,8 @@ import java.util.Map;
 
 public class Tree {
 
+    private static final int DISPLAY_SPACE_COUNT = 10;
+
     static Node createHuffmanTree(String text) {
         Hashtable<Character, Integer> characterIntegerHashtable = charCounter(text);
 
@@ -23,13 +25,8 @@ public class Tree {
             counter += 1;
         }
 
-        // Sort nodes array into ascending order
-        Comparator<Node> compareByFrequency = Comparator.comparing(Node::getFREQUENCY);
-
-
         // Sorts and merges Nodes while there is more than one
         while (nodes.length > 1) {
-            Arrays.sort(nodes, compareByFrequency);
             nodes = mergeNodes(nodes);
         }
 
@@ -41,6 +38,10 @@ public class Tree {
         // Returns array of one node if only two nodes are left
         if (nodes.length == 2) return new Node[]{new Node(nodes[1], nodes[0])};
 
+        // Sort nodes array into ascending order
+        Comparator<Node> compareByFrequency = Comparator.comparing(Node::getFREQUENCY);
+        Arrays.sort(nodes, compareByFrequency);
+
         // Copy array skipping first two nodes (smallest two nodes)
         Node[] newNodes = new Node[nodes.length-1];
         for (int i = 2; i < nodes.length; i++) {
@@ -49,7 +50,7 @@ public class Tree {
 
         // Create new node (internal) out of two smallest add to new array and return said array
         Node internalNode = new Node(nodes[1], nodes[0]);
-        newNodes[1] = internalNode;
+        newNodes[0] = internalNode;
 
         return newNodes;
     }
@@ -77,4 +78,25 @@ public class Tree {
         return charHashtable;
 
     }
+
+    static StringBuilder printTree(Node root, int spacing) {
+        StringBuilder output = new StringBuilder();
+
+        if (root == null) return output;
+
+        spacing += DISPLAY_SPACE_COUNT;
+
+        printTree(root.getRIGHT(), spacing);
+
+        output.append("\n");
+        for (int i = DISPLAY_SPACE_COUNT; i < spacing; i++) {
+            output.append(" ");
+        }
+        output.append(root.getCharacter()).append(" : ").append(root.getFREQUENCY());
+
+        printTree(root.getLEFT(), spacing);
+
+        return output;
+    }
+
 }

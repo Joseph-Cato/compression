@@ -1,11 +1,8 @@
 package compression.huffman;
 
-import compression.huffman.Tree;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Enumeration;
 import java.util.Hashtable;
 
 public class TreeTest {
@@ -54,14 +51,56 @@ public class TreeTest {
     }
 
     @Test
-    public void createHuffmanTreeTest() {
+    public void createHuffmanTreeTestOne() {
         Node base11 = new Node('b', 2);
         Node base12 = new Node('c', 1);
         Node base21 = new Node('a', 3);
         Node internal22 = new Node(base11, base12);
         Node internal31 = new Node(base21, internal22);
 
-        Assert.assertEquals(internal31, Tree.createHuffmanTree("aaabbc"));
+        Assert.assertEquals(internal31.toString(), Tree.createHuffmanTree("aaabbc").toString());
+    }
+
+    @Test
+    public void createHuffmanTreeTestTwo() {
+        Node base11 = new Node('S', 1);
+        Node base12 = new Node('R', 1);
+        Node base21 = new Node('L', 1);
+        Node base22 = new Node('N', 1);
+        Node base23 = new Node('K', 1);
+        Node base24 = new Node('F', 1);
+        Node base25 = new Node('B', 1);
+        Node base26 = new Node('H', 1);
+        Node base27 = new Node('U', 1);
+        Node int28 = new Node(base11, base12);
+        Node int31 = new Node(base21, base22);
+        Node int32 = new Node(base23, base24);
+        Node base33 = new Node('A', 2);
+        Node int34 = new Node(base25, base26);
+        Node base35 = new Node('I', 2);
+        Node base36 = new Node('W', 2);
+        Node base37 = new Node('D', 2);
+        Node base38 = new Node('G', 2);
+        Node base39 = new Node('E', 3);
+        Node int310 = new Node(base27,int28);
+        Node base311 = new Node('O', 3);
+        Node base312 = new Node('T', 3);
+        Node int41 = new Node(int31, int32);
+        Node int42 = new Node(base33, int34);
+        Node int43 = new Node(base35, base36);
+        Node int44 = new Node(base37, base38);
+        Node int45 = new Node(base39, int310);
+        Node int46 = new Node(base311, base312);
+        Node base51 = new Node(' ', 7);
+        Node int52 = new Node(int41, int42);
+        Node int53 = new Node(int43, int44);
+        Node int54 = new Node(int45, int46);
+        Node int61 = new Node(base51, int52);
+        Node int62 = new Node(int53, int54);
+        Node int71 = new Node(int61, int62);
+
+        Assert.assertEquals(int71.toString(), Tree.createHuffmanTree("THE BIG DOG WENT OUTSIDE FOR A WALK").toString());
+
     }
 
 

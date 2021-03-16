@@ -15,6 +15,7 @@ public class Node {
 
     //Internal Node
     public Node(Node LEFT, Node RIGHT) {
+        character = '\0';
         FREQUENCY = LEFT.FREQUENCY + RIGHT.FREQUENCY;
         this.LEFT = LEFT;
         this.RIGHT = RIGHT;
@@ -22,5 +23,22 @@ public class Node {
 
     public int getFREQUENCY() {
         return FREQUENCY;
+    }
+
+    public char getCharacter() {
+        return character;
+    }
+
+    public Node getLEFT() {
+        return LEFT;
+    }
+
+    public Node getRIGHT() {
+        return RIGHT;
+    }
+
+    @Override
+    public String toString() {
+        return Tree.printTree(this, 0).toString();
     }
 }
