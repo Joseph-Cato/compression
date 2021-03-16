@@ -53,5 +53,10 @@ public class TreeTest {
 
     }
 
+    @Test
+    public void createHuffmanTreeTest() {
+
+    }
+
 
 }

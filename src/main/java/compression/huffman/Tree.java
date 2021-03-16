@@ -3,16 +3,20 @@ package compression.huffman;
 import java.util.Hashtable;
 
 public class Tree {
-    private final Node ROOT;
-
-    public Tree(Node root) {
-        ROOT = root;
-    }
 
     static Tree createHuffmanTree(String text) {
-        Tree tree = new Tree(new InternalNode());
+        Hashtable<Character, Integer> characterIntegerHashtable = charCounter(text);
 
-        return tree;
+        Node[] nodes = new Node[characterIntegerHashtable.size()];
+
+        int counter = 0;
+
+        characterIntegerHashtable.forEach( (c, f) -> {
+            Node node = new Node(c, f);
+            nodes[counter] = node;
+            counter += 1;
+        });
+
     }
 
     static Hashtable<Character, Integer> charCounter(String text) {
