@@ -1,17 +1,15 @@
 package compression.huffman;
 
-import compression.huffman.Tree;
-
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Hashtable;
 
 public class TreeTest {
 
     @Test
-    public void charCounterTest() {
+    public void charCounterTestOne() {
 
         //Test 1
         Hashtable<Character, Integer> test1 = new Hashtable<Character, Integer>();
@@ -21,6 +19,11 @@ public class TreeTest {
         test1.put('d', 1);
 
         Assert.assertEquals(test1, Tree.charCounter("aaaabbbccd"));
+
+    }
+
+    @Test
+    public void charCounterTestTwo() {
 
         //Test 2
         Hashtable<Character, Integer> test2 = new Hashtable<Character, Integer>();
@@ -53,5 +56,48 @@ public class TreeTest {
 
     }
 
+    @Test
+    public void createHuffmanTreeTestOne() {
+
+        //Test 1
+        Node base11 = new Node('b', 2);
+        Node base12 = new Node('c', 1);
+        Node base21 = new Node('a', 3);
+        Node internal22 = new Node(base11, base12);
+        Node internal31 = new Node(base21, internal22);
+
+        Assert.assertEquals(internal31.toString(), Tree.createHuffmanTree("aaabbc").toString());
+    }
+
+    @Test
+    public void getCodesTestOne() {
+
+        //Test 1
+        HashMap<Character, String> expectedHashMap = new HashMap<>();
+        expectedHashMap.put('S', "00110");
+        expectedHashMap.put('R', "00001");
+        expectedHashMap.put('L', "00011");
+        expectedHashMap.put('N', "00000");
+        expectedHashMap.put('K', "00010");
+        expectedHashMap.put('F', "101000");
+        expectedHashMap.put('B', "10101");
+        expectedHashMap.put('H', "101001");
+        expectedHashMap.put('U', "00111");
+        expectedHashMap.put('A', "1011");
+        expectedHashMap.put('I', "1100");
+        expectedHashMap.put('T', "1101");
+        expectedHashMap.put('D', "1110");
+        expectedHashMap.put('G', "1111");
+        expectedHashMap.put('W', "0010");
+        expectedHashMap.put('E', "1000");
+        expectedHashMap.put('O', "1001");
+        expectedHashMap.put(' ', "01");
+
+        System.out.println(Tree.createHuffmanTree("HE BIG DOG WENT OUTSIDE FOR A WALK").toString());
+
+        HashMap<Character, String> actualHashMap = Tree.getCodes(Tree.createHuffmanTree("HE BIG DOG WENT OUTSIDE FOR A WALK"));
+
+        Assert.assertEquals(expectedHashMap, actualHashMap);
+    }
 
 }

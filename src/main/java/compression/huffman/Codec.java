@@ -5,7 +5,7 @@ public class Codec {
 
 
 
-
+/*
     protected static String encode(Tree huffmanTree, String text) {
         //TODO
     }
@@ -13,5 +13,5 @@ public class Codec {
     protected static void decode(Tree huffmanTree, String text) {
         //TODO
     }
-
+*/
 }
