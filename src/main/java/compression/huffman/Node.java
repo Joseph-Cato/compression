@@ -1,5 +1,7 @@
 package compression.huffman;
 
+import java.util.HashMap;
+
 public class Node {
     private char character;
     private final int FREQUENCY;
@@ -41,4 +43,5 @@ public class Node {
     public String toString() {
         return Tree.printTree(this, 0).toString();
     }
+
 }

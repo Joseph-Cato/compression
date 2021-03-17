@@ -1,11 +1,9 @@
 package compression.huffman;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.*;
 
 public class Tree {
+    private static HashMap<Character, String> codes = new HashMap<>();
 
     private static final int DISPLAY_SPACE_COUNT = 10;
 
@@ -97,6 +95,27 @@ public class Tree {
         printTree(root.getLEFT(), spacing);
 
         return output;
+    }
+
+    static void setCodes(Node root, StringBuilder path) {
+        if (root.getLEFT() != null) {
+            path.append("0");
+            setCodes(root.getLEFT(), path);
+        }
+        if (root.getCharacter() != '\0') {
+            codes.put(root.getCharacter(), path.toString());
+        }
+        if (root.getRIGHT() != null) {
+            path.append("1");
+            setCodes(root.getRIGHT(), path);
+        }
+    }
+
+    static HashMap<Character, String> getCodes(Node root) {
+        setCodes(root, new StringBuilder());
+        HashMap<Character, String> savedCodes = codes;
+        codes = new HashMap<Character, String>();
+        return savedCodes;
     }
 
 }
