@@ -120,24 +120,24 @@ public class TreeTest {
 
         //Test 1
         HashMap<Character, String> expectedHashMap = new HashMap<>();
-        expectedHashMap.put('S', "110110");
-        expectedHashMap.put('R', "110111");
-        expectedHashMap.put('L', "01100");
-        expectedHashMap.put('N', "01101");
-        expectedHashMap.put('K', "01110");
-        expectedHashMap.put('F', "01111");
-        expectedHashMap.put('B', "01000");
-        expectedHashMap.put('H', "01001");
-        expectedHashMap.put('U', "11010");
-        expectedHashMap.put('A', "0101");
-        expectedHashMap.put('I', "1000");
-        expectedHashMap.put('T', "1001");
-        expectedHashMap.put('D', "1010");
-        expectedHashMap.put('G', "1011");
-        expectedHashMap.put('W', "1100");
-        expectedHashMap.put('E', "1110");
-        expectedHashMap.put('O', "1111");
-        expectedHashMap.put(' ', "00");
+        expectedHashMap.put('S', "00110");
+        expectedHashMap.put('R', "00001");
+        expectedHashMap.put('L', "00011");
+        expectedHashMap.put('N', "00000");
+        expectedHashMap.put('K', "00010");
+        expectedHashMap.put('F', "101000");
+        expectedHashMap.put('B', "10101");
+        expectedHashMap.put('H', "101001");
+        expectedHashMap.put('U', "00111");
+        expectedHashMap.put('A', "1011");
+        expectedHashMap.put('I', "1100");
+        expectedHashMap.put('T', "1101");
+        expectedHashMap.put('D', "1110");
+        expectedHashMap.put('G', "1111");
+        expectedHashMap.put('W', "0010");
+        expectedHashMap.put('E', "1000");
+        expectedHashMap.put('O', "1001");
+        expectedHashMap.put(' ', "01");
 
         System.out.println(Tree.createHuffmanTree("HE BIG DOG WENT OUTSIDE FOR A WALK").toString());
 

@@ -16,7 +16,8 @@ public class Node {
     }
 
     //Internal Node
-    public Node(Node LEFT, Node RIGHT) {
+    public Node(Node LEFT, Node RIGHT) throws IllegalArgumentException {
+        if (LEFT == null || RIGHT == null) throw new IllegalArgumentException();
         character = '\0';
         FREQUENCY = LEFT.FREQUENCY + RIGHT.FREQUENCY;
         this.LEFT = LEFT;

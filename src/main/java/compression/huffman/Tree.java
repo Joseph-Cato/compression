@@ -90,7 +90,11 @@ public class Tree {
         for (int i = DISPLAY_SPACE_COUNT; i < spacing; i++) {
             output.append(" ");
         }
-        output.append(root.getCharacter()).append(" : ").append(root.getFREQUENCY());
+        if (root.getCharacter() == '\0') {
+            output.append("NULL : ").append(root.getFREQUENCY());
+        } else {
+            output.append(root.getCharacter()).append(" : ").append(root.getFREQUENCY());
+        }
 
         output.append(printTree(root.getLEFT(), spacing));
 
