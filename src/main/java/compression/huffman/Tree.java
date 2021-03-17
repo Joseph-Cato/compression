@@ -105,6 +105,7 @@ public class Tree {
         if (root.getLEFT() != null) {
             path.append("0");
             setCodes(root.getLEFT(), path);
+            path.deleteCharAt(path.length()-1);
         }
         if (root.getCharacter() != '\0') {
             codes.put(root.getCharacter(), path.toString());
@@ -112,6 +113,7 @@ public class Tree {
         if (root.getRIGHT() != null) {
             path.append("1");
             setCodes(root.getRIGHT(), path);
+            path.deleteCharAt(path.length()-1);
         }
     }
 
