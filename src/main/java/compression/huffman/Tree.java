@@ -84,7 +84,7 @@ public class Tree {
 
         spacing += DISPLAY_SPACE_COUNT;
 
-        printTree(root.getRIGHT(), spacing);
+        output.append(printTree(root.getRIGHT(), spacing));
 
         output.append("\n");
         for (int i = DISPLAY_SPACE_COUNT; i < spacing; i++) {
@@ -92,7 +92,7 @@ public class Tree {
         }
         output.append(root.getCharacter()).append(" : ").append(root.getFREQUENCY());
 
-        printTree(root.getLEFT(), spacing);
+        output.append(printTree(root.getLEFT(), spacing));
 
         return output;
     }
