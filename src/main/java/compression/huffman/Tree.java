@@ -53,7 +53,7 @@ public class Tree {
         return newNodes;
     }
 
-    static Hashtable<Character, Integer> charCounter(String text) {
+    protected static Hashtable<Character, Integer> charCounter(String text) {
 
         //Returns an empty hashtable if text string is empty/null
         if (text == null || text.equals("")) return new Hashtable<>();
