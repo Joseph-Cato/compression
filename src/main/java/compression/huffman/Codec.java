@@ -44,7 +44,7 @@ public class Codec {
                 code = new StringBuilder();
                 output.append(c);
 
-            } catch (Exception e) {
+            } catch (NullPointerException e) {
                 // If key is not found loop will continue
             }
         }
