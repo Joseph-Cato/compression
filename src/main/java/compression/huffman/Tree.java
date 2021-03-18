@@ -1,9 +1,14 @@
 package compression.huffman;
 
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.MapIterator;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
+
+import java.text.Bidi;
 import java.util.*;
 
 public class Tree {
-    private static HashMap<Character, String> codes = new HashMap<>();
+    private static BidiMap<Character, String> codes = new DualHashBidiMap<>();
 
     private static final int DISPLAY_SPACE_COUNT = 10;
 
@@ -117,10 +122,10 @@ public class Tree {
         }
     }
 
-    static HashMap<Character, String> getCodes(Node root) {
+    static BidiMap<Character, String> getCodes(Node root) {
         setCodes(root, new StringBuilder());
-        HashMap<Character, String> savedCodes = codes;
-        codes = new HashMap<Character, String>();
+        BidiMap<Character, String> savedCodes = codes;
+        codes = new DualHashBidiMap<>();
         return savedCodes;
     }
 

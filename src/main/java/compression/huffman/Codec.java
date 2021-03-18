@@ -9,7 +9,7 @@ public class Codec {
 
     static String encode(String text) {
 
-        HashMap<Character, String> codes = Tree.getCodes(Tree.createHuffmanTree(text));
+        BidiMap<Character, String> codes = Tree.getCodes(Tree.createHuffmanTree(text));
 
         StringBuilder output = new StringBuilder();
 
