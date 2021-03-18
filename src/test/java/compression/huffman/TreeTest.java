@@ -1,8 +1,11 @@
 package compression.huffman;
 
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.text.Bidi;
 import java.util.HashMap;
 import java.util.Hashtable;
 
@@ -73,7 +76,7 @@ public class TreeTest {
     public void getCodesTestOne() {
 
         //Test 1
-        HashMap<Character, String> expectedHashMap = new HashMap<>();
+        BidiMap<Character, String> expectedHashMap = new DualHashBidiMap<>();
         expectedHashMap.put('S', "00110");
         expectedHashMap.put('R', "00001");
         expectedHashMap.put('L', "00011");
@@ -95,7 +98,7 @@ public class TreeTest {
 
         System.out.println(Tree.createHuffmanTree("HE BIG DOG WENT OUTSIDE FOR A WALK").toString());
 
-        HashMap<Character, String> actualHashMap = Tree.getCodes(Tree.createHuffmanTree("HE BIG DOG WENT OUTSIDE FOR A WALK"));
+        BidiMap<Character, String> actualHashMap = Tree.getCodes(Tree.createHuffmanTree("HE BIG DOG WENT OUTSIDE FOR A WALK"));
 
         Assert.assertEquals(expectedHashMap, actualHashMap);
     }
