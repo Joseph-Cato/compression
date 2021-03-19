@@ -1,13 +1,13 @@
 package compression.huffman;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class FileControl {
 
-    public static void writeBinary(String binary){
+    public void writeBinary(String binary){
         String[] binaryList = binary.split("(?<=\\G........)");
         int finalBits = 8-binaryList[binaryList.length-1].length();
         for (int i = 0; i<finalBits; i++){
@@ -26,7 +26,7 @@ public class FileControl {
         }
     }
 
-    public static String readBinary(){
+    public String readBinary(){
         Path path = Paths.get("compressed.bin");
         String binary = null;
         try {
@@ -50,5 +50,26 @@ public class FileControl {
             e.printStackTrace();
         }
         return binary;
+    }
+
+    public void writeTree(Node tree){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("tree.ser"))) {
+            out.writeObject(tree);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Node readTree(){
+        Node tree = null;
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("tree.ser"))) {
+            tree = (Node) in.readObject();
+            assert tree == in.readObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return tree;
     }
 }
