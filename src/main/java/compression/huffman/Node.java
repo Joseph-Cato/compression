@@ -1,8 +1,9 @@
 package compression.huffman;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Node {
+public class Node implements Serializable {
     private char character;
     private final int FREQUENCY;
     private final Node LEFT, RIGHT;
