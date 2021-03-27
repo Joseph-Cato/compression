@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
+import java.io.File;
 
 public class App{
     private boolean compress;
@@ -28,8 +28,8 @@ public class App{
                 System.out.println("Start!");
                 try {
 
-                    if (compress) {
-                        compress(selectedFile, destinationFolder);
+                    if ( compress == true) {
+                        //TODO - call compress
                     } else {
                         decompress(selectedFile, destinationFolder);
                     }
@@ -86,27 +86,6 @@ public class App{
             }
         });
 
-    }
-
-    public void compress(String filePath, String destinationFolder) throws IOException {
-
-        String text = FileControl.readText(filePath);
-
-        text = Codec.encode(text);
-
-        FileControl.writeBinary(text, destinationFolder, "CompressedFile");
-
-        //TODO - write tree to file, not sure if this is the appropriate method or not
-    }
-
-    public void decompress(String filePath, String destinationFolder) throws IOException {
-
-        String text = FileControl.readBinary(filePath);
-/*
-        //TODO - get tree from file
-        text = Codec.decode(tree, text);
-*/
-        FileControl.writeText(text, destinationFolder, "DecompressedFile");
     }
 
     public static void main(String[] args) {
