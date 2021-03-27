@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Codec {
 
 
-    static String encode(String text) {
+    public static String encode(String text) {
 
         Node huffmanTree = Tree.createHuffmanTree(text);
 
@@ -22,7 +22,7 @@ public class Codec {
         return output.toString();
     }
 
-    static String decode(Node tree, String text) {
+    public static String decode(Node tree, String text) {
 
         // Get BidiMap of codes and characters
         BidiMap<Character, String> codes = Tree.getCodes(tree);

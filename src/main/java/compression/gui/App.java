@@ -1,12 +1,15 @@
 package compression.gui;
 
+import compression.huffman.Codec;
+import compression.huffman.FileControl;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.io.*;
 
-public class App {
+public class App{
     private boolean compress;
     public String selectedFile;
     public String destinationFolder;
@@ -25,10 +28,10 @@ public class App {
                 System.out.println("Start!");
                 try {
 
-                    if ( compress == true) {
-                        //TODO - call compress
+                    if (compress) {
+                        compress(selectedFile, destinationFolder);
                     } else {
-                        //TODO - call decompress
+                        decompress(selectedFile, destinationFolder);
                     }
 
                 } catch (Exception exception) {
@@ -82,6 +85,28 @@ public class App {
 
             }
         });
+
+    }
+
+    public void compress(String filePath, String destinationFolder) throws IOException {
+
+        String text = FileControl.readText(filePath);
+
+        text = Codec.encode(text);
+
+        FileControl.writeBinary(text, destinationFolder, "CompressedFile");
+
+        //TODO - write tree to file, not sure if this is the appropriate method or not
+    }
+
+    public void decompress(String filePath, String destinationFolder) throws IOException {
+
+        String text = FileControl.readBinary(filePath);
+/*
+        //TODO - get tree from file
+        text = Codec.decode(tree, text);
+*/
+        FileControl.writeText(text, destinationFolder, "DecompressedFile");
     }
 
     public static void main(String[] args) {
