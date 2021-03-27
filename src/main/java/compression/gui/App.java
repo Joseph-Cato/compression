@@ -4,7 +4,10 @@ import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class App {
     private boolean compress;
@@ -26,9 +29,9 @@ public class App {
                 try {
 
                     if ( compress == true) {
-                        //TODO - call compress
+                        compress(selectedFile, destinationFolder);
                     } else {
-                        //TODO - call decompress
+                        decompress(selectedFile, destinationFolder);
                     }
 
                 } catch (Exception exception) {
@@ -82,6 +85,16 @@ public class App {
 
             }
         });
+    }
+
+    public void compress(String selectedFile, String destinationFolder) throws FileNotFoundException {
+        File file = new File(selectedFile);
+
+        BufferedReader br = new BufferedReader(new FileReader(file));
+    }
+
+    public void decompress(String selectedFile, String destinationFolder) {
+
     }
 
     public static void main(String[] args) {
