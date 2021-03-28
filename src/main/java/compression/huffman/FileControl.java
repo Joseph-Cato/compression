@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 public class FileControl {
 
-    public void writeBinary(String binary){
+    public static void writeBinary(String binary){
         String[] binaryList = binary.split("(?<=\\G........)");
         int finalBits = 8-binaryList[binaryList.length-1].length();
         for (int i = 0; i<finalBits; i++){
@@ -26,7 +26,7 @@ public class FileControl {
         }
     }
 
-    public String readBinary(){
+    public static String readBinary(){
         Path path = Paths.get("compressed.bin");
         String binary = null;
         try {
@@ -52,7 +52,7 @@ public class FileControl {
         return binary;
     }
 
-    public void writeTree(Node tree){
+    public static void writeTree(Node tree){
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("tree.ser"))) {
             out.writeObject(tree);
         } catch (IOException e) {
@@ -60,7 +60,7 @@ public class FileControl {
         }
     }
 
-    public Node readTree(){
+    public static Node readTree(){
         Node tree = null;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("tree.ser"))) {
             tree = (Node) in.readObject();
