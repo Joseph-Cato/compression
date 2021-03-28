@@ -39,7 +39,11 @@ public class FileControl {
 
             for (int i = 0; i<fileBytes.length-1; i++){
                 int formattedByte = fileBytes[i] & 0xff;
-                binaryList[i] = Integer.toBinaryString(formattedByte);
+                String checkByte = Integer.toBinaryString(formattedByte);
+                while (checkByte.length()<8) {
+                    checkByte = "0"+checkByte;
+                }
+                binaryList[i] = checkByte;
             }
 
             String lastByte = binaryList[binaryList.length-1];
