@@ -1,13 +1,12 @@
 package compression.huffman;
 
 import org.apache.commons.collections4.BidiMap;
-import org.apache.commons.collections4.MapIterator;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
-import java.text.Bidi;
+import java.io.Serializable;
 import java.util.*;
 
-public class Tree {
+public class Tree implements Serializable {
     private static BidiMap<Character, String> codes = new DualHashBidiMap<>();
 
     private static final int DISPLAY_SPACE_COUNT = 10;
@@ -95,10 +94,10 @@ public class Tree {
         for (int i = DISPLAY_SPACE_COUNT; i < spacing; i++) {
             output.append(" ");
         }
-        if (root.getCharacter() == '\0') {
+        if (root.getCHARACTER() == '\0') {
             output.append("NULL : ").append(root.getFREQUENCY());
         } else {
-            output.append(root.getCharacter()).append(" : ").append(root.getFREQUENCY());
+            output.append(root.getCHARACTER()).append(" : ").append(root.getFREQUENCY());
         }
 
         output.append(printTree(root.getLEFT(), spacing));
@@ -112,8 +111,8 @@ public class Tree {
             setCodes(root.getLEFT(), path);
             path.deleteCharAt(path.length()-1);
         }
-        if (root.getCharacter() != '\0') {
-            codes.put(root.getCharacter(), path.toString());
+        if (root.getCHARACTER() != '\0') {
+            codes.put(root.getCHARACTER(), path.toString());
         }
         if (root.getRIGHT() != null) {
             path.append("1");

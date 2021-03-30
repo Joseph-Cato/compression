@@ -6,10 +6,17 @@ import java.util.HashMap;
 
 public class Codec {
 
+    static Node TREE;
+
+    public static Node getTREE(){
+        return TREE;
+    }
 
     public static String encode(String text) {
 
         Node huffmanTree = Tree.createHuffmanTree(text);
+
+        TREE = huffmanTree;
 
         BidiMap<Character, String> codes = Tree.getCodes(huffmanTree);
 
@@ -23,6 +30,8 @@ public class Codec {
     }
 
     public static String decode(Node tree, String text) {
+
+
 
         // Get BidiMap of codes and characters
         BidiMap<Character, String> codes = Tree.getCodes(tree);

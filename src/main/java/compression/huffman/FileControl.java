@@ -5,7 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class FileControl {
+public class FileControl implements Serializable{
 
      public static void writeBinary(String binary, String destinationFolder, String fileName){
 
@@ -67,17 +67,17 @@ public class FileControl {
         return binary.toString();
     }
 
-    static void writeTree(Node tree){
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("tree.ser"))) {
+    public static void writeTree(Node tree, String destinationFolder){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(destinationFolder + "/tree.ser"))) {
             out.writeObject(tree);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static Node readTree() {
+    public static Node readTree(String filePath) {
         Node tree = null;
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream("tree.ser"))) {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
             tree = (Node) in.readObject();
             assert tree == in.readObject();
         } catch (IOException | ClassNotFoundException e) {

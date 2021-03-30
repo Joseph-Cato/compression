@@ -1,25 +1,24 @@
 package compression.huffman;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 public class Node implements Serializable {
-    private char character;
+    private final char CHARACTER;
     private final int FREQUENCY;
     private final Node LEFT, RIGHT;
 
     //Leaf Node
-    public Node(char character, int FREQUENCY) {
+    public Node(char CHARACTER, int FREQUENCY) {
         LEFT = null;
         RIGHT = null;
-        this.character = character;
+        this.CHARACTER = CHARACTER;
         this.FREQUENCY = FREQUENCY;
     }
 
     //Internal Node
     public Node(Node LEFT, Node RIGHT) throws IllegalArgumentException {
         if (LEFT == null || RIGHT == null) throw new IllegalArgumentException();
-        character = '\0';
+        CHARACTER = '\0';
         FREQUENCY = LEFT.FREQUENCY + RIGHT.FREQUENCY;
         this.LEFT = LEFT;
         this.RIGHT = RIGHT;
@@ -29,8 +28,8 @@ public class Node implements Serializable {
         return FREQUENCY;
     }
 
-    public char getCharacter() {
-        return character;
+    public char getCHARACTER() {
+        return CHARACTER;
     }
 
     public Node getLEFT() {

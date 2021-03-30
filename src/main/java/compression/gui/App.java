@@ -2,6 +2,7 @@ package compression.gui;
 
 import compression.huffman.Codec;
 import compression.huffman.FileControl;
+import compression.huffman.Node;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
@@ -97,19 +98,26 @@ public class App{
 
         FileControl.writeBinary(text, destinationFolder, "CompressedFile.bin");
 
-        //TODO - write binary tree to a file - not sure if this is the correct method
+        FileControl.writeTree(Codec.getTREE(), destinationFolder);
     }
 
     public void decompress(String filePath, String destinationFolder) throws IOException {
 
         String text = FileControl.readBinary(filePath);
 
-        //TODO - get file from tree
-        /*
+        StringBuilder treeFilePath = new StringBuilder();
+        // TODO get rid of /CompressedFile.Bin and add /tree.ser to string!
+        for (int i = 0; i<filePath.length()-18; i++) {
+            treeFilePath.append(filePath.charAt(i));
+        }
+        treeFilePath.append("tree.ser");
+
+        Node tree = FileControl.readTree(treeFilePath.toString());
+
         text = Codec.decode(tree, text);
-         */
 
         FileControl.writeText(text, destinationFolder, "DecompressedFile");
+
     }
 
     public static void main(String[] args) {
