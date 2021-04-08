@@ -14,6 +14,8 @@ public class Codec {
 
     public static String encode(String text) {
 
+        System.out.println("Codec.encode running");
+
         Node huffmanTree = Tree.createHuffmanTree(text);
 
         TREE = huffmanTree;
@@ -31,7 +33,7 @@ public class Codec {
 
     public static String decode(Node tree, String text) {
 
-
+        System.out.println("Codec.decode running");
 
         // Get BidiMap of codes and characters
         BidiMap<Character, String> codes = Tree.getCodes(tree);
