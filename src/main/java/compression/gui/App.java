@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class App{
-    private boolean compress;
+    private static boolean compress;
     public String selectedFile;
     public String destinationFolder;
 
@@ -31,9 +31,15 @@ public class App{
                 try {
 
                     if (compress) {
+                        long timer = System.currentTimeMillis();
+                        System.out.println("Compress: \nsleectedFile: " + selectedFile +"\ndestinationFolder: " +destinationFolder);
                         compress(selectedFile, destinationFolder);
+                        System.out.println("Compression completed in: " + (timer-System.currentTimeMillis()) + "ms");
                     } else {
+                        long timer = System.currentTimeMillis();
+                        System.out.println("Decompress: \nsleectedFile: " + selectedFile +"\ndestinationFolder: " +destinationFolder);
                         decompress(selectedFile, destinationFolder);
+                        System.out.println("Decompression completed in: " + (timer-System.currentTimeMillis()) + "ms");
                     }
 
                 } catch (Exception exception) {
@@ -90,7 +96,7 @@ public class App{
 
     }
 
-    public void compress(String filePath, String destinationFolder) throws IOException {
+    public static void compress(String filePath, String destinationFolder) throws IOException {
 
         String text = FileControl.readText(filePath);
 
@@ -101,12 +107,12 @@ public class App{
         FileControl.writeTree(Codec.getTREE(), destinationFolder);
     }
 
-    public void decompress(String filePath, String destinationFolder) throws IOException {
+    public static void decompress(String filePath, String destinationFolder) throws IOException {
 
         String text = FileControl.readBinary(filePath);
 
         StringBuilder treeFilePath = new StringBuilder();
-        // TODO get rid of /CompressedFile.Bin and add /tree.ser to string!
+
         for (int i = 0; i<filePath.length()-18; i++) {
             treeFilePath.append(filePath.charAt(i));
         }
@@ -116,7 +122,7 @@ public class App{
 
         text = Codec.decode(tree, text);
 
-        FileControl.writeText(text, destinationFolder, "DecompressedFile");
+        FileControl.writeText(text, destinationFolder, "DecompressedFile.txt");
 
     }
 

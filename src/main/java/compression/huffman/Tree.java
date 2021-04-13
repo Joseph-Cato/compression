@@ -12,6 +12,8 @@ public class Tree implements Serializable {
     private static final int DISPLAY_SPACE_COUNT = 10;
 
     static Node createHuffmanTree(String text) {
+
+        System.out.println("Tree.createHuffmanTree running");
         Hashtable<Character, Integer> characterIntegerHashtable = charCounter(text);
 
         // Create array for nodes
@@ -106,18 +108,20 @@ public class Tree implements Serializable {
     }
 
     static void setCodes(Node root, StringBuilder path) {
-        if (root.getLEFT() != null) {
-            path.append("0");
-            setCodes(root.getLEFT(), path);
-            path.deleteCharAt(path.length()-1);
-        }
-        if (root.getCHARACTER() != '\0') {
-            codes.put(root.getCHARACTER(), path.toString());
-        }
-        if (root.getRIGHT() != null) {
-            path.append("1");
-            setCodes(root.getRIGHT(), path);
-            path.deleteCharAt(path.length()-1);
+        if (root != null) {
+            if (root.getLEFT() != null) {
+                path.append("0");
+                setCodes(root.getLEFT(), path);
+                path.deleteCharAt(path.length() - 1);
+            }
+            if (root.getCHARACTER() != '\0') {
+                codes.put(root.getCHARACTER(), path.toString());
+            }
+            if (root.getRIGHT() != null) {
+                path.append("1");
+                setCodes(root.getRIGHT(), path);
+                path.deleteCharAt(path.length() - 1);
+            }
         }
     }
 

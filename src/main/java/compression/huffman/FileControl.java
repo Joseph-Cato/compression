@@ -9,6 +9,7 @@ public class FileControl implements Serializable{
 
      public static void writeBinary(String binary, String destinationFolder, String fileName){
 
+         System.out.println("FileControl.writeBinary running");
         String[] binaryList = binary.split("(?<=\\G........)");
         int finalBits = 8-binaryList[binaryList.length-1].length();
         for (int i = 0; i<finalBits; i++){
@@ -29,6 +30,7 @@ public class FileControl implements Serializable{
 
     public static String readBinary(String filePath){
 
+         System.out.println("FileControl.readBinary running");
         Path path = Paths.get(filePath); // <- TODO - check this works
         StringBuilder binary = null;
 
@@ -68,6 +70,8 @@ public class FileControl implements Serializable{
     }
 
     public static void writeTree(Node tree, String destinationFolder){
+
+        System.out.println("FileControl.writeTree running");
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(destinationFolder + "/tree.ser"))) {
             out.writeObject(tree);
         } catch (IOException e) {
@@ -76,11 +80,15 @@ public class FileControl implements Serializable{
     }
 
     public static Node readTree(String filePath) {
+
+        System.out.println("FileControl.readTree running");
+        System.out.println("filePath: " + filePath);
         Node tree = null;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath))) {
             tree = (Node) in.readObject();
             assert tree == in.readObject();
         } catch (IOException | ClassNotFoundException e) {
+            System.out.println("readTree exception catch");
             e.printStackTrace();
         }
         return tree;
@@ -93,6 +101,8 @@ public class FileControl implements Serializable{
      * @throws IOException
      */
     public static String readText(String filePath) throws IOException {
+
+        System.out.println("FileControl.readText running");
         boolean done = false;
 
         File file = new File(filePath);
@@ -103,17 +113,23 @@ public class FileControl implements Serializable{
 
         while (!done) {
             String line = bufferedReader.readLine();
-            if (line == null) done = true;
-            output.append(line);
+            if (line == null) {
+                done = true;
+            } else {
+                output.append(line);
+            }
+
         }
 
         return output.toString();
     }
 
     public static void writeText(String text, String filePath, String fileName) throws IOException {
-        File newFile = new File(filePath + fileName); // TODO - test if this concatenation works
 
-        FileWriter fileWriter = new FileWriter(filePath + fileName);
+        System.out.println("FileControl.writeText running");
+        File newFile = new File(filePath + "/" + fileName); // TODO - test if this concatenation works
+
+        FileWriter fileWriter = new FileWriter(filePath + "/" + fileName);
 
         fileWriter.write(text);
         fileWriter.close();

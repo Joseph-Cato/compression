@@ -16,7 +16,7 @@ public class CodecTest {
     @Test
     public void decodeTestOne() {
 
-        // Test 2
+        // Test 1
         Node tree = Tree.createHuffmanTree("aaabbc");
 
         Assert.assertEquals("aaabbc", Codec.decode(tree ,"000101011"));
