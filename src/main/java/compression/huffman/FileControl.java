@@ -41,11 +41,11 @@ public class FileControl implements Serializable{
 
             for (int i = 0; i<fileBytes.length-1; i++){
                 int formattedByte = fileBytes[i] & 0xff;
-                String checkByte = Integer.toBinaryString(formattedByte);
+                StringBuilder checkByte = new StringBuilder(Integer.toBinaryString(formattedByte));
                 while (checkByte.length()<8) {
-                    checkByte = "0"+checkByte;
+                    checkByte.insert(0, "0");
                 }
-                binaryList[i] = checkByte;
+                binaryList[i] = checkByte.toString();
             }
 
             String lastByte = binaryList[binaryList.length-1];
@@ -98,7 +98,7 @@ public class FileControl implements Serializable{
      *
      * @param filePath - location of text file to be read
      * @return - returns a string of all text from the selected file
-     * @throws IOException
+     * @throws IOException thrown from bufferedReader.readLine()
      */
     public static String readText(String filePath) throws IOException {
 
@@ -127,7 +127,7 @@ public class FileControl implements Serializable{
     public static void writeText(String text, String filePath, String fileName) throws IOException {
 
         System.out.println("FileControl.writeText running");
-        File newFile = new File(filePath + "/" + fileName); // TODO - test if this concatenation works
+        new File(filePath + "/" + fileName);
 
         FileWriter fileWriter = new FileWriter(filePath + "/" + fileName);
 

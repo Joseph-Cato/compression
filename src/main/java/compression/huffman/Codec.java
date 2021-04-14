@@ -2,8 +2,6 @@ package compression.huffman;
 
 import org.apache.commons.collections4.BidiMap;
 
-import java.util.HashMap;
-
 public class Codec {
 
     static Node TREE;

@@ -6,9 +6,6 @@ import compression.huffman.Node;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 
 public class App{
@@ -24,74 +21,58 @@ public class App{
     private JButton setDestinationFolderButton;
 
     public App() {
-        buttonStart.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Start!");
-                try {
+        buttonStart.addActionListener(e -> {
+            System.out.println("Start!");
+            try {
 
-                    if (compress) {
-                        long timer = System.currentTimeMillis();
-                        System.out.println("Compress: \nsleectedFile: " + selectedFile +"\ndestinationFolder: " +destinationFolder);
-                        compress(selectedFile, destinationFolder);
-                        System.out.println("Compression completed in: " + (timer-System.currentTimeMillis()) + "ms");
-                    } else {
-                        long timer = System.currentTimeMillis();
-                        System.out.println("Decompress: \nsleectedFile: " + selectedFile +"\ndestinationFolder: " +destinationFolder);
-                        decompress(selectedFile, destinationFolder);
-                        System.out.println("Decompression completed in: " + (timer-System.currentTimeMillis()) + "ms");
-                    }
-
-                } catch (Exception exception) {
-                    System.out.println(exception.toString());
-                }
-            }
-        });
-        radioButtonCompress.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                compress = true;
-                System.out.println("App set to compress");
-            }
-        });
-        radioButtonDecompress.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                compress = false;
-                System.out.println("App set to decompress");
-            }
-        });
-        setDestinationFolderButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
-                j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-                int r = j.showSaveDialog(null);
-
-                if (r == JFileChooser.APPROVE_OPTION) {
-                    destinationFolder = j.getSelectedFile().getAbsolutePath();
+                long timer = System.currentTimeMillis();
+                if (compress) {
+                    System.out.println("Compress: \nsleectedFile: " + selectedFile +"\ndestinationFolder: " +destinationFolder);
+                    compress(selectedFile, destinationFolder);
+                    System.out.println("Compression completed in: " + (timer-System.currentTimeMillis()) + "ms");
+                } else {
+                    System.out.println("Decompress: \nsleectedFile: " + selectedFile +"\ndestinationFolder: " +destinationFolder);
+                    decompress(selectedFile, destinationFolder);
+                    System.out.println("Decompression completed in: " + (timer-System.currentTimeMillis()) + "ms");
                 }
 
-                System.out.println("Destination folder set to: " + destinationFolder);
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         });
-        selectFileButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        radioButtonCompress.addActionListener(e -> {
+            compress = true;
+            System.out.println("App set to compress");
+        });
+        radioButtonDecompress.addActionListener(e -> {
+            compress = false;
+            System.out.println("App set to decompress");
+        });
+        setDestinationFolderButton.addActionListener(e -> {
 
-                int r = j.showSaveDialog(null);
+            JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
-                if (r == JFileChooser.APPROVE_OPTION) {
-                    selectedFile = j.getSelectedFile().getAbsolutePath();
-                }
+            j.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-                System.out.println("File set to: " + selectedFile);
+            int r = j.showSaveDialog(null);
 
+            if (r == JFileChooser.APPROVE_OPTION) {
+                destinationFolder = j.getSelectedFile().getAbsolutePath();
             }
+
+            System.out.println("Destination folder set to: " + destinationFolder);
+        });
+        selectFileButton.addActionListener(e -> {
+            JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+            int r = j.showSaveDialog(null);
+
+            if (r == JFileChooser.APPROVE_OPTION) {
+                selectedFile = j.getSelectedFile().getAbsolutePath();
+            }
+
+            System.out.println("File set to: " + selectedFile);
+
         });
 
     }

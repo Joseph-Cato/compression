@@ -48,9 +48,7 @@ public class Tree implements Serializable {
 
         // Copy array skipping first two nodes (smallest two nodes)
         Node[] newNodes = new Node[nodes.length-1];
-        for (int i = 2; i < nodes.length; i++) {
-            newNodes[i-1] = nodes[i];
-        }
+        if (nodes.length - 2 >= 0) System.arraycopy(nodes, 2, newNodes, 1, nodes.length - 2);
 
         // Create new node (internal) out of two smallest add to new array and return said array
         Node internalNode = new Node(nodes[1], nodes[0]);
@@ -93,9 +91,7 @@ public class Tree implements Serializable {
         output.append(printTree(root.getRIGHT(), spacing));
 
         output.append("\n");
-        for (int i = DISPLAY_SPACE_COUNT; i < spacing; i++) {
-            output.append(" ");
-        }
+        output.append(" ".repeat(Math.max(0, spacing - DISPLAY_SPACE_COUNT)));
         if (root.getCHARACTER() == '\0') {
             output.append("NULL : ").append(root.getFREQUENCY());
         } else {
