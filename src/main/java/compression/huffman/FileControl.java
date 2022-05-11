@@ -20,7 +20,7 @@ public class FileControl implements Serializable{
             bytes[i] = (byte) Integer.parseInt(binaryList[i], 2);
         }
         bytes[binaryList.length] = (byte) finalBits;
-        Path path = Paths.get(destinationFolder+ "/" + fileName); //<- TODO - check this works
+        Path path = Paths.get(destinationFolder+ "/" + fileName);
         try {
             Files.write(path, bytes);
         } catch (IOException e) {
