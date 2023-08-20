@@ -12,9 +12,9 @@ public class FileControlTest {
     @Test
     public void testBinaryOne(){
 
-        FileControl.writeBinary("0101000000001", "/home/joseph/Desktop", "joeIsGay.bin");
+        FileControl.writeBinary("0101000000001", "../", "test.bin");
 
-        String text = FileControl.readBinary("/home/joseph/Desktop/joeIsGay.bin");
+        String text = FileControl.readBinary("..//test.bin");
 
         Assert.assertEquals("0101000000001", text);
     }
@@ -24,9 +24,9 @@ public class FileControlTest {
 
         Node tree = Tree.createHuffmanTree("aaabbc");
 
-        FileControl.writeTree(tree, "/home/joseph/Desktop");
+        FileControl.writeTree(tree, "../");
 
-        Node readTree = FileControl.readTree("/home/joseph/Desktop/tree.ser");
+        Node readTree = FileControl.readTree("../tree.ser");
 
         Assert.assertEquals(tree.toString(), readTree.toString());
     }
@@ -34,7 +34,7 @@ public class FileControlTest {
     @Test
     public void writeTextTestOne(){
         try {
-            FileControl.writeText("Hi my name is Bobington :)", "/home/joseph/Desktop", "hi.txt");
+            FileControl.writeText("Hi my name is Bobington :)", "../", "test2.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,9 +43,9 @@ public class FileControlTest {
     @Test
     public void readTextTestOne() {
         try {
-            String text = FileControl.readText("/home/joseph/Desktop/hi.txt");
+            String text = FileControl.readText("../test2.txt");
 
-            Assert.assertEquals("Hi my name is Bobington :)", text);
+            Assert.assertEquals("Example Text", text);
         } catch (IOException e) {
             e.printStackTrace();
         }
