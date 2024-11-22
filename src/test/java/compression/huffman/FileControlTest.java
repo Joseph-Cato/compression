@@ -34,7 +34,7 @@ public class FileControlTest {
     @Test
     public void writeTextTestOne(){
         try {
-            FileControl.writeText("Hi my name is Bobington :)", "../", "test2.txt");
+            FileControl.writeText("Example Text", "../", "test2.txt");
         } catch (IOException e) {
             e.printStackTrace();
         }
